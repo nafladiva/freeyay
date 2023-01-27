@@ -23,7 +23,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
       if (res.statusCode == 200) {
         final decoded = json.decode(res.body);
-        return [];
+        return List<GameMdl>.from(decoded.map((x) => GameMdl.fromMap(x)));
       } else if (res.statusCode == 404) {
         throw DataException();
       } else if (res.statusCode == 500) {

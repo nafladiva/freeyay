@@ -10,7 +10,7 @@ class GameMdl extends Equatable {
   final String platform;
   final String publisher;
   final String developer;
-  final String releaseDate;
+  final DateTime? releaseDate;
 
   const GameMdl({
     required this.id,
@@ -25,7 +25,20 @@ class GameMdl extends Equatable {
     required this.releaseDate,
   });
 
-  //TODO: add fromMap
+  factory GameMdl.fromMap(Map<String, dynamic> json) => GameMdl(
+        id: json["id"],
+        title: json["title"],
+        thumbnail: json["thumbnail"],
+        shortDescription: json["short_description"],
+        gameUrl: json["game_url"],
+        genre: json["genre"],
+        platform: json["platform"],
+        publisher: json["publisher"],
+        developer: json["developer"],
+        releaseDate: json["release_date"] != null
+            ? DateTime.parse(json["release_date"])
+            : null,
+      );
 
   @override
   List<Object?> get props => [
