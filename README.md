@@ -6,3 +6,8 @@ This app is using Free-To-Play API for the data, and this is its API documentati
 https://www.freetogame.com/api-doc
 
 ### Keep going!!
+
+---
+
+TODO:
+- [ ] Implement repository, execute data from API
