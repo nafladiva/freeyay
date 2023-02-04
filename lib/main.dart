@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:freeyay/injection.dart' as di;
+
+import 'presentation/pages/home_page.dart';
 
 void main() {
+  di.init();
   runApp(const MyApp());
 }
 
@@ -14,12 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      //TODO: adjust to its own home screen
-      home: const Scaffold(
-        body: Center(
-          child: Text('Freeyay'),
-        ),
-      ),
+      home: const HomePage(),
     );
   }
 }
