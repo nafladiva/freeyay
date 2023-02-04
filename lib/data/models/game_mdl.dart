@@ -1,28 +1,28 @@
-import 'package:equatable/equatable.dart';
+import 'package:freeyay/domain/entities/game.dart';
 
-class GameMdl extends Equatable {
+class GameMdl {
   final int id;
-  final String title;
-  final String thumbnail;
-  final String shortDescription;
-  final String gameUrl;
-  final String genre;
-  final String platform;
-  final String publisher;
-  final String developer;
+  final String? title;
+  final String? thumbnail;
+  final String? shortDescription;
+  final String? gameUrl;
+  final String? genre;
+  final String? platform;
+  final String? publisher;
+  final String? developer;
   final DateTime? releaseDate;
 
   const GameMdl({
     required this.id,
-    required this.title,
-    required this.thumbnail,
-    required this.shortDescription,
-    required this.gameUrl,
-    required this.genre,
-    required this.platform,
-    required this.publisher,
-    required this.developer,
-    required this.releaseDate,
+    this.title,
+    this.thumbnail,
+    this.shortDescription,
+    this.gameUrl,
+    this.genre,
+    this.platform,
+    this.publisher,
+    this.developer,
+    this.releaseDate,
   });
 
   factory GameMdl.fromMap(Map<String, dynamic> json) => GameMdl(
@@ -35,22 +35,16 @@ class GameMdl extends Equatable {
         platform: json["platform"],
         publisher: json["publisher"],
         developer: json["developer"],
-        releaseDate: json["release_date"] != null
-            ? DateTime.parse(json["release_date"])
-            : null,
+        releaseDate: DateTime.tryParse(json["release_date"]),
       );
 
-  @override
-  List<Object?> get props => [
-        id,
-        title,
-        thumbnail,
-        shortDescription,
-        gameUrl,
-        genre,
-        platform,
-        publisher,
-        developer,
-        releaseDate,
-      ];
+  Game toEntity() {
+    return Game(
+      id: id,
+      title: title ?? '',
+      thumbnail: thumbnail ?? '',
+      description: shortDescription ?? '',
+      genre: genre ?? '',
+    );
+  }
 }
