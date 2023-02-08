@@ -10,7 +10,7 @@ final locator = GetIt.instance;
 
 void init() {
   //Bloc
-  locator.registerFactory(() => GameBloc(locator()));
+  locator.registerFactory(() => GameBloc(locator(), locator()));
 
   //Use Cases
   locator.registerLazySingleton(() => GetLiveGames(locator()));

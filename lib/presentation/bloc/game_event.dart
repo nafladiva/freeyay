@@ -10,7 +10,7 @@ abstract class GameEvent extends Equatable {
 class OnFetchLiveGames extends GameEvent {}
 
 class OnFetchGamesByPlatform extends GameEvent {
-  final String platform;
+  final Platform platform;
 
   const OnFetchGamesByPlatform(this.platform);
 }

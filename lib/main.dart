@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freeyay/injection.dart' as di;
 
-import 'presentation/pages/home_page.dart';
+import 'presentation/pages/home/home_page.dart';
 
 void main() {
   di.init();

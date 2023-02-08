@@ -5,6 +5,8 @@ import 'package:freeyay/common/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freeyay/domain/repositories/repository.dart';
 
+import '../../common/enums.dart';
+
 class RepositoryImpl implements Repository {
   final RemoteDataSource remoteDataSource;
 
@@ -23,8 +25,15 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, List<Game>>> getGamesByPlatform(String platform) {
-    // TODO: implement getGamesByPlatform
-    throw UnimplementedError();
+  Future<Either<Failure, List<Game>>> getGamesByPlatform(
+      Platform platform) async {
+    try {
+      final result = await remoteDataSource.getGamesByPlatform(platform);
+      return Right(result.map((e) => e.toEntity()).toList());
+    } on ServerException {
+      return Left(ServerFailure());
+    } on DataException {
+      return Left(DataFailure());
+    }
   }
 }
