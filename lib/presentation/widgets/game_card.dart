@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:freeyay/domain/entities/game.dart';
 
 class GameCard extends StatelessWidget {
-  final String title;
-  final String desc;
-  final String genre;
+  final Game game;
 
   const GameCard({
     super.key,
-    required this.title,
-    required this.desc,
-    required this.genre,
+    required this.game,
   });
 
   @override
@@ -18,9 +15,9 @@ class GameCard extends StatelessWidget {
       padding: const EdgeInsets.all(14.0),
       child: Column(
         children: [
-          Text(title),
-          Text(desc),
-          Text(genre),
+          Text(game.title),
+          Text(game.description),
+          Text(game.genre),
         ],
       ),
     );

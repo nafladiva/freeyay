@@ -64,9 +64,7 @@ class _GamesByPlatformViewState extends State<GamesByPlatformView> {
                 final game = state.gameList[random];
 
                 return GameCard(
-                  title: game.title,
-                  desc: game.description,
-                  genre: game.genre,
+                  game: game,
                 );
               }
 

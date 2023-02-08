@@ -14,6 +14,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameBloc = locator<GameBloc>();
+    gameBloc.add(OnFetchLiveGames());
 
     return Scaffold(
       body: Padding(
@@ -29,9 +30,7 @@ class HomePage extends StatelessWidget {
                     final game = state.gameList[random];
 
                     return GameCard(
-                      title: game.title,
-                      desc: game.description,
-                      genre: game.genre,
+                      game: game,
                     );
                   }
 
