@@ -11,15 +11,14 @@ class GameCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(14.0),
-      child: Column(
-        children: [
-          Text(game.title),
-          Text(game.description),
-          Text(game.genre),
-        ],
-      ),
+    return Column(
+      children: [
+        Image.network(game.thumbnail),
+        const SizedBox(height: 5.0),
+        Text(game.title),
+        // Text(game.description),
+        Text(game.genre),
+      ],
     );
   }
 }
