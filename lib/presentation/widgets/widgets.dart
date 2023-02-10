@@ -1,5 +1,5 @@
-export 'chip_button.dart';
-export 'game_card.dart';
-export 'game_card_loader.dart';
-export 'my_chip.dart';
-export 'scrollable_horizontal_view.dart';
+export 'button/button.dart';
+export 'card/card.dart';
+export 'loader/loader.dart';
+export 'chip/chip.dart';
+export 'container/container.dart';
