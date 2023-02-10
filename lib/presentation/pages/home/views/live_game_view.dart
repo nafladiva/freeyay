@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freeyay/common/enums.dart';
+import 'package:freeyay/common/text_styles.dart';
 import 'package:freeyay/injection.dart';
 import 'package:freeyay/presentation/bloc/bloc.dart';
 import 'package:freeyay/presentation/widgets/widgets.dart';
@@ -31,30 +30,54 @@ class _LiveGameViewState extends State<LiveGameView> {
     return BlocProvider.value(
       value: gameBloc,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            'Live Games',
+            style: TStyles.heading1(),
+          ),
+          const SizedBox(height: 20.0),
           BlocBuilder<GameBloc, GameState>(
             builder: (context, state) {
               if (state is GameSuccess) {
-                final random = Random().nextInt(10);
-                final game = state.gameList[random];
+                final games = state.gameList.take(10);
 
-                return GameCard(
-                  game: game,
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      ...games.map(
+                        (game) => GameCard(game: game),
+                      ),
+                      Column(
+                        children: [
+                          const Icon(
+                            Icons.chevron_right,
+                            size: 30.0,
+                          ),
+                          Text(
+                            'See more',
+                            style: TStyles.subheading2(),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 );
               }
 
               if (state is GameLoading) {
-                return const CircularProgressIndicator();
+                return const GameCardLoader();
               }
 
               return const SizedBox();
             },
           ),
           const SizedBox(height: 20.0),
-          ElevatedButton(
-            onPressed: () => gameBloc.add(OnFetchLiveGames()),
-            child: const Icon(Icons.refresh),
-          ),
+          // ElevatedButton(
+          //   onPressed: () => gameBloc.add(OnFetchLiveGames()),
+          //   child: const Icon(Icons.refresh),
+          // ),
         ],
       ),
     );

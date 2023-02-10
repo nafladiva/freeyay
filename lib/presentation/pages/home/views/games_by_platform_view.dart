@@ -69,7 +69,7 @@ class _GamesByPlatformViewState extends State<GamesByPlatformView> {
               }
 
               if (state is GameLoading) {
-                return const CircularProgressIndicator();
+                return const GameCardLoader();
               }
 
               return const SizedBox();

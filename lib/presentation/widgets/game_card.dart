@@ -14,25 +14,31 @@ class GameCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
-          child: CachedNetworkImage(
-            width: 200,
-            imageUrl: game.thumbnail,
-            // placeholder: (_, __) => const CircularProgressIndicator(),
+    return Container(
+      width: 200.0,
+      margin: const EdgeInsets.only(right: 12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: CachedNetworkImage(
+              width: 200,
+              imageUrl: game.thumbnail,
+              // placeholder: (_, __) => const CircularProgressIndicator(),
+            ),
           ),
-        ),
-        const SizedBox(height: 8.0),
-        Text(
-          game.title,
-          style: TStyles.subheading2(),
-        ),
-        const SizedBox(height: 4.0),
-        MyChip(text: game.genre),
-      ],
+          const SizedBox(height: 8.0),
+          Text(
+            game.title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TStyles.subheading2(),
+          ),
+          const SizedBox(height: 4.0),
+          MyChip(text: game.genre),
+        ],
+      ),
     );
   }
 }
