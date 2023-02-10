@@ -42,27 +42,12 @@ class _LiveGameViewState extends State<LiveGameView> {
               if (state is GameSuccess) {
                 final games = state.gameList.take(10);
 
-                return SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      ...games.map(
-                        (game) => GameCard(game: game),
-                      ),
-                      Column(
-                        children: [
-                          const Icon(
-                            Icons.chevron_right,
-                            size: 30.0,
-                          ),
-                          Text(
-                            'See more',
-                            style: TStyles.subheading2(),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
+                return ScrollableHorizontalView(
+                  children: [
+                    ...games.map(
+                      (game) => GameCard(game: game),
+                    ),
+                  ],
                 );
               }
 

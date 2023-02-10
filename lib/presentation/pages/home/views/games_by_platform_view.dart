@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freeyay/common/enums.dart';
+import 'package:freeyay/common/text_styles.dart';
 import 'package:freeyay/injection.dart';
 import 'package:freeyay/presentation/bloc/bloc.dart';
 import 'package:freeyay/presentation/widgets/widgets.dart';
@@ -31,40 +30,44 @@ class _GamesByPlatformViewState extends State<GamesByPlatformView> {
     return BlocProvider.value(
       value: gameBloc,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            'Games by Platform',
+            style: TStyles.heading1(),
+          ),
+          const SizedBox(height: 15.0),
           Row(
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  gameBloc.add(const OnFetchGamesByPlatform(Platform.all));
-                },
-                child: const Text('All'),
+              ChipButton(
+                text: 'All',
+                onTap: () =>
+                    gameBloc.add(const OnFetchGamesByPlatform(Platform.all)),
               ),
-              const SizedBox(width: 10.0),
-              ElevatedButton(
-                onPressed: () {
-                  gameBloc.add(const OnFetchGamesByPlatform(Platform.pc));
-                },
-                child: const Text('PC'),
+              ChipButton(
+                text: 'PC',
+                onTap: () =>
+                    gameBloc.add(const OnFetchGamesByPlatform(Platform.pc)),
               ),
-              const SizedBox(width: 10.0),
-              ElevatedButton(
-                onPressed: () {
-                  gameBloc.add(const OnFetchGamesByPlatform(Platform.browser));
-                },
-                child: const Text('Browser'),
+              ChipButton(
+                text: 'Browser',
+                onTap: () => gameBloc
+                    .add(const OnFetchGamesByPlatform(Platform.browser)),
               ),
             ],
           ),
-          const SizedBox(height: 20.0),
+          const SizedBox(height: 15.0),
           BlocBuilder<GameBloc, GameState>(
             builder: (context, state) {
               if (state is GameSuccess) {
-                final random = Random().nextInt(10);
-                final game = state.gameList[random];
+                final games = state.gameList;
 
-                return GameCard(
-                  game: game,
+                return ScrollableHorizontalView(
+                  children: [
+                    ...games.map(
+                      (game) => GameCard(game: game),
+                    ),
+                  ],
                 );
               }
 

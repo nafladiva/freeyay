@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: const [
               LiveGameView(),
-              SizedBox(height: 30.0),
+              SizedBox(height: 20.0),
               GamesByPlatformView(),
             ],
           ),
