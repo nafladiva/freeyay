@@ -15,12 +15,12 @@ class GameBloc extends Bloc<GameEvent, GameState> {
 
   GameBloc(this.getLiveGames, this.getGamesByPlatform) : super(GameInitial()) {
     on<OnFetchLiveGames>((event, emit) async {
-      emit(GameLoading());
+      emit(const GameLoading());
 
       final res = await getLiveGames.execute();
       res.fold(
         (failure) {
-          emit(const GameError('[Error]'));
+          emit(const GameError('Failed to fetch data'));
         },
         (data) {
           emit(GameSuccess(data));
@@ -31,15 +31,15 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     on<OnFetchGamesByPlatform>((event, emit) async {
       final platform = event.platform;
 
-      emit(GameLoading());
+      emit(GameLoading(platform: platform));
 
       final res = await getGamesByPlatform.execute(platform);
       res.fold(
         (failure) {
-          emit(const GameError('[Error]'));
+          emit(GameError('Failed to fetch data', platform: platform));
         },
         (data) {
-          emit(GameSuccess(data));
+          emit(GameSuccess(data, platform: platform));
         },
       );
     });

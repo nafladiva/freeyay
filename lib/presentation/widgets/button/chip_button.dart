@@ -8,6 +8,7 @@ class ChipButton extends StatelessWidget {
     this.textStyle,
     this.padding,
     this.color,
+    this.isSelected = true,
     super.key,
   });
 
@@ -16,6 +17,7 @@ class ChipButton extends StatelessWidget {
   final EdgeInsets? padding;
   final Color? color;
   final VoidCallback onTap;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class ChipButton extends StatelessWidget {
         padding: padding ??
             const EdgeInsets.symmetric(horizontal: 14.0, vertical: 4.0),
         decoration: BoxDecoration(
-          color: color ?? Colors.orange,
+          color: (color ?? Colors.orange).withOpacity(isSelected ? 1.0 : 0.6),
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Text(
