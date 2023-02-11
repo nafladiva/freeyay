@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freeyay/common/enums.dart';
 import 'package:freeyay/common/text_styles.dart';
-import 'package:freeyay/injection.dart';
 import 'package:freeyay/presentation/bloc/bloc.dart';
 import 'package:freeyay/presentation/widgets/widgets.dart';
 
 class LiveGameView extends StatefulWidget {
+  final GameBloc bloc;
+
   const LiveGameView({
     Key? key,
+    required this.bloc,
   }) : super(key: key);
 
   @override
@@ -16,19 +18,16 @@ class LiveGameView extends StatefulWidget {
 }
 
 class _LiveGameViewState extends State<LiveGameView> {
-  late GameBloc gameBloc;
-
   @override
   void initState() {
     super.initState();
-    gameBloc = locator<GameBloc>();
-    gameBloc.add(const OnFetchGamesByPlatform(Platform.all));
+    widget.bloc.add(const OnFetchGamesByPlatform(Platform.all));
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: gameBloc,
+      value: widget.bloc,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -59,10 +58,6 @@ class _LiveGameViewState extends State<LiveGameView> {
             },
           ),
           const SizedBox(height: 20.0),
-          // ElevatedButton(
-          //   onPressed: () => gameBloc.add(OnFetchLiveGames()),
-          //   child: const Icon(Icons.refresh),
-          // ),
         ],
       ),
     );
