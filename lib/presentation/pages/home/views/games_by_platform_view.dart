@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freeyay/common/enums.dart';
-import 'package:freeyay/common/text_styles.dart';
+import 'package:freeyay/common/common.dart';
 import 'package:freeyay/presentation/bloc/bloc.dart';
 import 'package:freeyay/presentation/widgets/widgets.dart';
 
@@ -82,6 +81,7 @@ class _GamesByPlatformViewState extends State<GamesByPlatformView> {
               return const SizedBox();
             },
           ),
+          const SizedBox(height: 30.0),
         ],
       ),
     );

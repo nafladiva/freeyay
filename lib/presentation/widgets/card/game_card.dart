@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:freeyay/common/text_styles.dart';
-import 'package:freeyay/domain/entities/game.dart';
+import 'package:freeyay/common/common.dart';
+import 'package:freeyay/domain/entities/entities.dart';
 import 'package:freeyay/presentation/widgets/widgets.dart';
 
 class GameCard extends StatelessWidget {

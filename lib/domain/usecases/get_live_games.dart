@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:freeyay/common/failure.dart';
-import 'package:freeyay/domain/entities/game.dart';
+import 'package:freeyay/common/common.dart';
+import 'package:freeyay/domain/entities/entities.dart';
 import 'package:freeyay/domain/repositories/repository.dart';
 
 class GetLiveGames {

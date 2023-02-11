@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freeyay/common/enums.dart';
+import 'package:freeyay/common/common.dart';
 import 'package:freeyay/injection.dart';
 import 'package:freeyay/presentation/bloc/bloc.dart';
 
@@ -38,8 +38,8 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   LiveGameView(bloc: liveGameBloc),
-                  const SizedBox(height: 20.0),
                   GamesByPlatformView(bloc: platformGameBloc),
+                  YourFavoriteView(),
                 ],
               ),
             ),

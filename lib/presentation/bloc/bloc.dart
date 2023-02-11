@@ -1,1 +1,2 @@
-export 'game_bloc.dart';
+export 'favorite/favorite.dart';
+export 'game/game.dart';

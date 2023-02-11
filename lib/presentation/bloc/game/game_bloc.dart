@@ -1,10 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:freeyay/domain/entities/game.dart';
-import 'package:freeyay/domain/usecases/get_games_by_platform.dart';
-import 'package:freeyay/domain/usecases/get_live_games.dart';
-
-import '../../common/enums.dart';
+import 'package:freeyay/common/common.dart';
+import 'package:freeyay/domain/entities/entities.dart';
+import 'package:freeyay/domain/usecases/usecases.dart';
 
 part 'game_event.dart';
 part 'game_state.dart';

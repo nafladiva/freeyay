@@ -1,4 +1,4 @@
-import 'package:freeyay/domain/entities/game.dart';
+import 'package:freeyay/domain/entities/entities.dart';
 
 class GameMdl {
   final int id;

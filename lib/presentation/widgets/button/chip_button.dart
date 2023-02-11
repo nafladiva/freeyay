@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freeyay/common/text_styles.dart';
+import 'package:freeyay/common/common.dart';
 
 class ChipButton extends StatelessWidget {
   const ChipButton({

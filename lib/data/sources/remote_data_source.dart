@@ -1,12 +1,9 @@
 import 'dart:convert';
 
-import 'package:freeyay/common/exceptions.dart';
+import 'package:freeyay/common/common.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:freeyay/data/models/game_mdl.dart';
-
-import '../../common/consts.dart';
-import '../../common/enums.dart';
+import 'package:freeyay/data/models/models.dart';
 
 abstract class RemoteDataSource {
   Future<List<GameMdl>> getLiveGames();
