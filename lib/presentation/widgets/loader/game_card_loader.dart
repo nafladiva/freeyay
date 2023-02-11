@@ -15,6 +15,7 @@ class GameCardLoader extends StatelessWidget {
           Container(
             width: 200,
             height: 110,
+            margin: const EdgeInsets.only(right: 12.0),
             decoration: BoxDecoration(
               color: Colors.grey,
               borderRadius: BorderRadius.circular(10.0),

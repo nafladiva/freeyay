@@ -50,9 +50,7 @@ class _LiveGameViewState extends State<LiveGameView> {
                 );
               }
 
-              if (state is GameLoading) {
-                return const GameCardLoader();
-              }
+              if (state is GameLoading) return const GameListLoader();
 
               return const SizedBox();
             },
