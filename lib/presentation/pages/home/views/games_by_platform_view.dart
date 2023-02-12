@@ -31,6 +31,7 @@ class _GamesByPlatformViewState extends State<GamesByPlatformView> {
         ),
         const SizedBox(height: 15.0),
         BlocBuilder<GameBloc, GameState>(
+          bloc: widget.bloc,
           builder: (context, state) {
             Platform? selectedPlatform = state.platform;
 

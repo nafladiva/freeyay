@@ -23,6 +23,7 @@ class _YourFavoriteViewState extends State<YourFavoriteView> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Your Favorites',

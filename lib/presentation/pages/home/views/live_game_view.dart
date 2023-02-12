@@ -34,6 +34,7 @@ class _LiveGameViewState extends State<LiveGameView> {
         ),
         const SizedBox(height: 20.0),
         BlocBuilder<GameBloc, GameState>(
+          bloc: widget.bloc,
           builder: (context, state) {
             if (state is GameSuccess) {
               final games = state.gameList.take(10);
