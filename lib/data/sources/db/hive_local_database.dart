@@ -22,7 +22,7 @@ class HiveLocalDatabase {
       id: game.id,
       title: game.title,
       thumbnail: game.thumbnail,
-      shortDescription: game.description,
+      description: game.description,
       genre: game.genre,
     );
   }

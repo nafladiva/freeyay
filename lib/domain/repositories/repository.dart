@@ -6,6 +6,7 @@ abstract class Repository {
   //Remote
   Future<Either<Failure, List<Game>>> getLiveGame();
   Future<Either<Failure, List<Game>>> getGamesByPlatform(Platform platform);
+  Future<Either<Failure, Game>> getDetailGame(int gameId);
 
   //Local
   Future<Either<Failure, List<Game>>> getFavoriteGames();

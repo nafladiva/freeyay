@@ -12,7 +12,7 @@ class GameMdl extends HiveObject {
   @HiveField(2)
   final String? thumbnail;
   @HiveField(3)
-  final String? shortDescription;
+  final String? description;
   final String? gameUrl;
   @HiveField(4)
   final String? genre;
@@ -20,31 +20,38 @@ class GameMdl extends HiveObject {
   final String? publisher;
   final String? developer;
   final DateTime? releaseDate;
+  final List<String>? screenshots;
 
   GameMdl({
     required this.id,
     this.title,
     this.thumbnail,
-    this.shortDescription,
+    this.description,
     this.gameUrl,
     this.genre,
     this.platform,
     this.publisher,
     this.developer,
     this.releaseDate,
+    this.screenshots,
   });
 
   factory GameMdl.fromMap(Map<String, dynamic> json) => GameMdl(
         id: json["id"],
         title: json["title"],
         thumbnail: json["thumbnail"],
-        shortDescription: json["short_description"],
+        description: json["description"],
         gameUrl: json["game_url"],
         genre: json["genre"],
         platform: json["platform"],
         publisher: json["publisher"],
         developer: json["developer"],
         releaseDate: DateTime.tryParse(json["release_date"]),
+        screenshots: json["screenshots"] != null
+            ? List<String>.from(
+                (json["screenshots"] as List).map((item) => item["image"]),
+              )
+            : null,
       );
 
   Game toEntity() {
@@ -52,8 +59,9 @@ class GameMdl extends HiveObject {
       id: id,
       title: title ?? '',
       thumbnail: thumbnail ?? '',
-      description: shortDescription ?? '',
+      description: description,
       genre: genre ?? '',
+      screenshots: screenshots,
     );
   }
 }

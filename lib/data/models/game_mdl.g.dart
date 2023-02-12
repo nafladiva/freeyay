@@ -20,7 +20,7 @@ class GameMdlAdapter extends TypeAdapter<GameMdl> {
       id: fields[0] as int,
       title: fields[1] as String?,
       thumbnail: fields[2] as String?,
-      shortDescription: fields[3] as String?,
+      description: fields[3] as String?,
       genre: fields[4] as String?,
     );
   }
@@ -36,7 +36,7 @@ class GameMdlAdapter extends TypeAdapter<GameMdl> {
       ..writeByte(2)
       ..write(obj.thumbnail)
       ..writeByte(3)
-      ..write(obj.shortDescription)
+      ..write(obj.description)
       ..writeByte(4)
       ..write(obj.genre);
   }

@@ -39,6 +39,18 @@ class RepositoryImpl implements Repository {
   }
 
   @override
+  Future<Either<Failure, Game>> getDetailGame(int gameId) async {
+    try {
+      final result = await remoteDataSource.getDetailGame(gameId);
+      return Right(result.toEntity());
+    } on ServerException {
+      return Left(ServerFailure());
+    } on DataException {
+      return Left(DataFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, String>> addFavorite(Game game) async {
     try {
       await localDataSource.addFavorite(game);
