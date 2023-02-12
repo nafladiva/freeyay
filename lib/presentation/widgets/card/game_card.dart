@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freeyay/common/common.dart';
 import 'package:freeyay/domain/entities/entities.dart';
+import 'package:freeyay/presentation/bloc/bloc.dart';
 import 'package:freeyay/presentation/widgets/widgets.dart';
 
 class GameCard extends StatelessWidget {
@@ -20,13 +22,30 @@ class GameCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10.0),
-            child: CachedNetworkImage(
-              width: 200,
-              imageUrl: game.thumbnail,
-              // placeholder: (_, __) => const CircularProgressIndicator(),
-            ),
+          Stack(
+            alignment: Alignment.topRight,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: CachedNetworkImage(
+                  width: 200,
+                  imageUrl: game.thumbnail,
+                  // placeholder: (_, __) => const CircularProgressIndicator(),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: InkWell(
+                  onTap: () {
+                    context.read<FavoriteBloc>().add(OnAddFavorite(game));
+                  },
+                  child: const Icon(
+                    Icons.favorite,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 8.0),
           Text(

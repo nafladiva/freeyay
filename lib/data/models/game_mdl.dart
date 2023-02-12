@@ -1,18 +1,27 @@
 import 'package:freeyay/domain/entities/entities.dart';
+import 'package:hive/hive.dart';
 
-class GameMdl {
+part 'game_mdl.g.dart';
+
+@HiveType(typeId: 0)
+class GameMdl extends HiveObject {
+  @HiveField(0)
   final int id;
+  @HiveField(1)
   final String? title;
+  @HiveField(2)
   final String? thumbnail;
+  @HiveField(3)
   final String? shortDescription;
   final String? gameUrl;
+  @HiveField(4)
   final String? genre;
   final String? platform;
   final String? publisher;
   final String? developer;
   final DateTime? releaseDate;
 
-  const GameMdl({
+  GameMdl({
     required this.id,
     this.title,
     this.thumbnail,

@@ -6,8 +6,12 @@ import 'package:freeyay/domain/repositories/repository.dart';
 
 class RepositoryImpl implements Repository {
   final RemoteDataSource remoteDataSource;
+  final LocalDataSource localDataSource;
 
-  RepositoryImpl({required this.remoteDataSource});
+  RepositoryImpl({
+    required this.remoteDataSource,
+    required this.localDataSource,
+  });
 
   @override
   Future<Either<Failure, List<Game>>> getLiveGame() async {
@@ -32,5 +36,31 @@ class RepositoryImpl implements Repository {
     } on DataException {
       return Left(DataFailure());
     }
+  }
+
+  @override
+  Future<Either<Failure, String>> addFavorite(Game game) async {
+    try {
+      await localDataSource.addFavorite(game);
+      return const Right('Berhasil menambahkan favorite');
+    } on DataException {
+      return Left(DataFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Game>>> getFavoriteGames() async {
+    try {
+      final result = await localDataSource.getAllFavoriteGames();
+      return Right(result);
+    } on DataException {
+      return Left(DataFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> removeFavorite(Game game) {
+    // TODO: implement removeFavorite
+    throw UnimplementedError();
   }
 }

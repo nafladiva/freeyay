@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freeyay/common/common.dart';
+import 'package:freeyay/presentation/bloc/bloc.dart';
+import 'package:freeyay/presentation/widgets/widgets.dart';
 
-class YourFavoriteView extends StatelessWidget {
-  const YourFavoriteView({super.key});
+class YourFavoriteView extends StatefulWidget {
+  final FavoriteBloc bloc;
+
+  const YourFavoriteView({super.key, required this.bloc});
+
+  @override
+  State<YourFavoriteView> createState() => _YourFavoriteViewState();
+}
+
+class _YourFavoriteViewState extends State<YourFavoriteView> {
+  @override
+  void initState() {
+    super.initState();
+    widget.bloc.add(OnLoadFavorite());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +29,19 @@ class YourFavoriteView extends StatelessWidget {
           style: TStyles.heading1(),
         ),
         const SizedBox(height: 15.0),
+        BlocBuilder<FavoriteBloc, FavoriteState>(
+          builder: (context, state) {
+            final favoriteGames = state.favoriteGames ?? [];
+
+            return ScrollableHorizontalView(
+              children: [
+                ...favoriteGames.map(
+                  (game) => GameCard(game: game),
+                ),
+              ],
+            );
+          },
+        ),
       ],
     );
   }

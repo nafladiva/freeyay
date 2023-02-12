@@ -11,16 +11,32 @@ final locator = GetIt.instance;
 void init() {
   //Bloc
   locator.registerFactory(() => GameBloc(locator(), locator()));
+  locator.registerFactory(() => FavoriteBloc(locator(), locator()));
 
   //Use Cases
   locator.registerLazySingleton(() => GetLiveGames(locator()));
   locator.registerLazySingleton(() => GetGamesByPlatform(locator()));
+  locator.registerLazySingleton(() => GetFavoriteGames(locator()));
+  locator.registerLazySingleton(() => AddFavorite(locator()));
 
   //Repository
   locator.registerLazySingleton<Repository>(
-    () => RepositoryImpl(remoteDataSource: locator()),
+    () => RepositoryImpl(
+      remoteDataSource: locator(),
+      localDataSource: locator(),
+    ),
   );
 
   //Remote Data Source
   locator.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl());
+
+  //Local Data Source
+  locator.registerLazySingleton<LocalDataSource>(
+    () => LocalDataSourceImpl(hiveDatabase: locator()),
+  );
+
+  //Hive database
+  locator.registerLazySingleton<HiveLocalDatabase>(
+    () => HiveLocalDatabase(),
+  );
 }

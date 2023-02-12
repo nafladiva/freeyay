@@ -7,6 +7,8 @@ abstract class FavoriteEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class OnLoadFavorite extends FavoriteEvent {}
+
 class OnAddFavorite extends FavoriteEvent {
   final Game game;
 

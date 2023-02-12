@@ -22,68 +22,65 @@ class _GamesByPlatformViewState extends State<GamesByPlatformView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: widget.bloc,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Games by Platform',
-            style: TStyles.heading1(),
-          ),
-          const SizedBox(height: 15.0),
-          BlocBuilder<GameBloc, GameState>(
-            builder: (context, state) {
-              Platform? selectedPlatform = state.platform;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Games by Platform',
+          style: TStyles.heading1(),
+        ),
+        const SizedBox(height: 15.0),
+        BlocBuilder<GameBloc, GameState>(
+          builder: (context, state) {
+            Platform? selectedPlatform = state.platform;
 
-              return Row(
+            return Row(
+              children: [
+                ChipButton(
+                  text: 'All',
+                  isSelected: selectedPlatform == Platform.all,
+                  onTap: () => widget.bloc
+                      .add(const OnFetchGamesByPlatform(Platform.all)),
+                ),
+                ChipButton(
+                  text: 'PC',
+                  isSelected: selectedPlatform == Platform.pc,
+                  onTap: () => widget.bloc
+                      .add(const OnFetchGamesByPlatform(Platform.pc)),
+                ),
+                ChipButton(
+                  text: 'Browser',
+                  isSelected: selectedPlatform == Platform.browser,
+                  onTap: () => widget.bloc
+                      .add(const OnFetchGamesByPlatform(Platform.browser)),
+                ),
+              ],
+            );
+          },
+        ),
+        const SizedBox(height: 15.0),
+        BlocBuilder<GameBloc, GameState>(
+          builder: (context, state) {
+            if (state is GameSuccess) {
+              final games = state.gameList;
+
+              return ScrollableHorizontalView(
                 children: [
-                  ChipButton(
-                    text: 'All',
-                    isSelected: selectedPlatform == Platform.all,
-                    onTap: () => widget.bloc
-                        .add(const OnFetchGamesByPlatform(Platform.all)),
-                  ),
-                  ChipButton(
-                    text: 'PC',
-                    isSelected: selectedPlatform == Platform.pc,
-                    onTap: () => widget.bloc
-                        .add(const OnFetchGamesByPlatform(Platform.pc)),
-                  ),
-                  ChipButton(
-                    text: 'Browser',
-                    isSelected: selectedPlatform == Platform.browser,
-                    onTap: () => widget.bloc
-                        .add(const OnFetchGamesByPlatform(Platform.browser)),
+                  ...games.map(
+                    (game) => GameCard(game: game),
                   ),
                 ],
               );
-            },
-          ),
-          const SizedBox(height: 15.0),
-          BlocBuilder<GameBloc, GameState>(
-            builder: (context, state) {
-              if (state is GameSuccess) {
-                final games = state.gameList;
+            }
 
-                return ScrollableHorizontalView(
-                  children: [
-                    ...games.map(
-                      (game) => GameCard(game: game),
-                    ),
-                  ],
-                );
-              }
+            if (state is GameLoading) return const GameListLoader();
+            if (state is GameError) return Text(state.errorMessage ?? '');
 
-              if (state is GameLoading) return const GameListLoader();
-              if (state is GameError) return Text(state.errorMessage ?? '');
-
-              return const SizedBox();
-            },
-          ),
-          const SizedBox(height: 30.0),
-        ],
-      ),
+            return const SizedBox();
+          },
+        ),
+        const SizedBox(height: 30.0),
+      ],
     );
   }
 }

@@ -25,38 +25,35 @@ class _LiveGameViewState extends State<LiveGameView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: widget.bloc,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Live Games',
-            style: TStyles.heading1(),
-          ),
-          const SizedBox(height: 20.0),
-          BlocBuilder<GameBloc, GameState>(
-            builder: (context, state) {
-              if (state is GameSuccess) {
-                final games = state.gameList.take(10);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Live Games',
+          style: TStyles.heading1(),
+        ),
+        const SizedBox(height: 20.0),
+        BlocBuilder<GameBloc, GameState>(
+          builder: (context, state) {
+            if (state is GameSuccess) {
+              final games = state.gameList.take(10);
 
-                return ScrollableHorizontalView(
-                  children: [
-                    ...games.map(
-                      (game) => GameCard(game: game),
-                    ),
-                  ],
-                );
-              }
+              return ScrollableHorizontalView(
+                children: [
+                  ...games.map(
+                    (game) => GameCard(game: game),
+                  ),
+                ],
+              );
+            }
 
-              if (state is GameLoading) return const GameListLoader();
+            if (state is GameLoading) return const GameListLoader();
 
-              return const SizedBox();
-            },
-          ),
-          const SizedBox(height: 30.0),
-        ],
-      ),
+            return const SizedBox();
+          },
+        ),
+        const SizedBox(height: 30.0),
+      ],
     );
   }
 }
