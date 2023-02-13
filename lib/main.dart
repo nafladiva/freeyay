@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freeyay/common/common.dart';
 import 'package:freeyay/injection.dart' as di;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'data/models/models.dart';
+import 'presentation/bloc/favorite/favorite.dart';
 import 'presentation/pages/home/home_page.dart';
 
 Future<void> main() async {
@@ -23,13 +25,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Freeyay',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        textTheme: GoogleFonts.poppinsTextTheme(),
+    return BlocProvider(
+      create: (context) => di.locator<FavoriteBloc>(),
+      child: MaterialApp(
+        title: 'Freeyay',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          textTheme: GoogleFonts.poppinsTextTheme(),
+        ),
+        home: const HomePage(),
       ),
-      home: const HomePage(),
     );
   }
 }

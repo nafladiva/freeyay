@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     liveGameBloc = locator<GameBloc>();
     platformGameBloc = locator<GameBloc>();
-    favoriteBloc = locator<FavoriteBloc>();
+    favoriteBloc = context.read<FavoriteBloc>();
   }
 
   @override
@@ -39,7 +39,6 @@ class _HomePageState extends State<HomePage> {
       providers: [
         BlocProvider.value(value: liveGameBloc),
         BlocProvider.value(value: platformGameBloc),
-        BlocProvider.value(value: favoriteBloc),
       ],
       child: Scaffold(
         body: SafeArea(

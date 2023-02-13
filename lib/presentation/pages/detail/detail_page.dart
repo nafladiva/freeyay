@@ -44,7 +44,13 @@ class _DetailPageState extends State<DetailPage> {
               }
 
               if (state is DetailGameSuccess) {
-                return BodyView(game: state.game);
+                return BodyView(
+                  game: state.game,
+                  isFavorite: state.isFavorite,
+                  onTapFavoriteCallback: () => detailBloc.add(
+                    OnLoadDetailGame(state.game.id),
+                  ),
+                );
               }
 
               if (state is DetailGameFailed) {

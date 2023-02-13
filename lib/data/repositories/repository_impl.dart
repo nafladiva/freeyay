@@ -75,4 +75,14 @@ class RepositoryImpl implements Repository {
     // TODO: implement removeFavorite
     throw UnimplementedError();
   }
+
+  @override
+  Future<bool> checkFavoriteStatus(Game game) async {
+    try {
+      final result = await localDataSource.checkFavoriteStatus(game);
+      return result;
+    } on DataException {
+      return false;
+    }
+  }
 }

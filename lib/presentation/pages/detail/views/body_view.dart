@@ -7,10 +7,14 @@ import 'package:freeyay/presentation/widgets/widgets.dart';
 class BodyView extends StatelessWidget {
   const BodyView({
     required this.game,
+    required this.isFavorite,
+    required this.onTapFavoriteCallback,
     super.key,
   });
 
   final Game game;
+  final bool isFavorite;
+  final VoidCallback onTapFavoriteCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,11 @@ class BodyView extends StatelessWidget {
                 fit: BoxFit.fill,
                 imageUrl: game.thumbnail,
               ),
-              FavoriteButton(game: game)
+              FavoriteButton(
+                game: game,
+                isFavorite: isFavorite,
+                callback: onTapFavoriteCallback,
+              )
             ],
           ),
           const SizedBox(height: 20.0),

@@ -4,6 +4,7 @@ import 'package:freeyay/domain/entities/entities.dart';
 
 abstract class LocalDataSource {
   Future<List<Game>> getAllFavoriteGames();
+  Future<bool> checkFavoriteStatus(Game game);
   Future<void> addFavorite(Game game);
   Future<void> removeFavorite(Game game);
 }
@@ -36,5 +37,14 @@ class LocalDataSourceImpl implements LocalDataSource {
   Future<void> removeFavorite(Game game) {
     // TODO: implement removeFavorite
     throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> checkFavoriteStatus(Game game) async {
+    try {
+      return hiveDatabase.checkFavoriteStatus(game);
+    } catch (e) {
+      throw DatabaseException();
+    }
   }
 }

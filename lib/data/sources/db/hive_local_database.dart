@@ -16,6 +16,10 @@ class HiveLocalDatabase {
     Hive.box<GameMdl>(favoriteBox).delete(game.id);
   }
 
+  bool checkFavoriteStatus(Game game) {
+    return Hive.box<GameMdl>(favoriteBox).containsKey(game.id);
+  }
+
   //Convert game entity to hive model
   GameMdl _convertToGameMdl(Game game) {
     return GameMdl(
