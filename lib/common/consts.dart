@@ -1,3 +1,7 @@
-const baseUrl = 'https://www.freetogame.com/api';
+class Constant {
+  static const appName = 'Freeyay';
 
-const favoriteBox = 'favorite';
+  static const baseUrl = 'https://www.freetogame.com/api';
+
+  static const favoriteBox = 'favorite';
+}

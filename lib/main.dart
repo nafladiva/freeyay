@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freeyay/common/common.dart';
-import 'package:freeyay/injection.dart' as di;
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'injection.dart' as di;
+import 'common/common.dart';
 import 'data/models/models.dart';
-import 'presentation/bloc/favorite/favorite.dart';
+import 'presentation/bloc/bloc.dart';
 import 'presentation/pages/home/home_page.dart';
 
 Future<void> main() async {
@@ -14,7 +13,7 @@ Future<void> main() async {
 
   await Hive.initFlutter();
   Hive.registerAdapter<GameMdl>(GameMdlAdapter());
-  await Hive.openBox<GameMdl>(favoriteBox);
+  await Hive.openBox<GameMdl>(Constant.favoriteBox);
 
   di.init();
   runApp(const MyApp());
@@ -28,11 +27,8 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => di.locator<FavoriteBloc>(),
       child: MaterialApp(
-        title: 'Freeyay',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          textTheme: GoogleFonts.poppinsTextTheme(),
-        ),
+        title: Constant.appName,
+        theme: Themes.myTheme,
         home: const HomePage(),
       ),
     );

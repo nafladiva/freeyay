@@ -41,6 +41,23 @@ class _HomePageState extends State<HomePage> {
         BlocProvider.value(value: platformGameBloc),
       ],
       child: Scaffold(
+        appBar: AppBar(
+          elevation: 0.5,
+          backgroundColor: Colors.white,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/app-logo.png',
+                width: 60,
+              ),
+              Text(
+                Constant.appName,
+                style: TStyles.heading1(),
+              ),
+            ],
+          ),
+        ),
         body: SafeArea(
           child: RefreshIndicator(
             onRefresh: _refreshPage,

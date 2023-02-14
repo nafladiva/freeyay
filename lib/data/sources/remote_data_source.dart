@@ -16,7 +16,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<List<GameMdl>> getLiveGames() async {
     try {
       final res = await http.get(
-        Uri.parse('$baseUrl/games'),
+        Uri.parse('${Constant.baseUrl}/games'),
       );
 
       if (res.statusCode == 200) {
@@ -38,7 +38,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<List<GameMdl>> getGamesByPlatform(Platform platform) async {
     try {
       final res = await http.get(
-        Uri.parse('$baseUrl/games?platform=${platform.name}'),
+        Uri.parse('${Constant.baseUrl}/games?platform=${platform.name}'),
       );
 
       if (res.statusCode == 200) {
@@ -60,7 +60,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<GameMdl> getDetailGame(int gameId) async {
     try {
       final res = await http.get(
-        Uri.parse('$baseUrl/game?id=$gameId'),
+        Uri.parse('${Constant.baseUrl}/game?id=$gameId'),
       );
 
       if (res.statusCode == 200) {

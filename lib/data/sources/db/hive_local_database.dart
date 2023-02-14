@@ -5,19 +5,20 @@ import 'package:hive/hive.dart';
 
 class HiveLocalDatabase {
   Box<GameMdl> getFavorites() {
-    return Hive.box<GameMdl>(favoriteBox);
+    return Hive.box<GameMdl>(Constant.favoriteBox);
   }
 
   void addFavorite(Game game) {
-    Hive.box<GameMdl>(favoriteBox).put(game.id, _convertToGameMdl(game));
+    Hive.box<GameMdl>(Constant.favoriteBox)
+        .put(game.id, _convertToGameMdl(game));
   }
 
   void removeFavorite(Game game) {
-    Hive.box<GameMdl>(favoriteBox).delete(game.id);
+    Hive.box<GameMdl>(Constant.favoriteBox).delete(game.id);
   }
 
   bool checkFavoriteStatus(Game game) {
-    return Hive.box<GameMdl>(favoriteBox).containsKey(game.id);
+    return Hive.box<GameMdl>(Constant.favoriteBox).containsKey(game.id);
   }
 
   //Convert game entity to hive model
