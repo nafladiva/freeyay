@@ -18,32 +18,59 @@ class BodyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Stack(
-            alignment: Alignment.topRight,
-            children: [
-              CachedNetworkImage(
-                width: double.infinity,
-                fit: BoxFit.fill,
-                imageUrl: game.thumbnail,
-              ),
-              FavoriteButton(
-                game: game,
-                isFavorite: isFavorite,
-                callback: onTapFavoriteCallback,
-              )
-            ],
-          ),
-          const SizedBox(height: 20.0),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
+    return CustomScrollView(
+      slivers: [
+        DefaultTabController(
+          length: 2,
+          child: SliverAppBar(
+            pinned: true,
+            expandedHeight: 200,
+            collapsedHeight: 90,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   game.title,
-                  style: TStyles.heading1(),
+                  style: TStyles.heading1(color: Colors.white),
+                ),
+                FavoriteButton(
+                  game: game,
+                  isFavorite: isFavorite,
+                  callback: () {},
+                ),
+              ],
+            ),
+            flexibleSpace: FlexibleSpaceBar(
+              background: CachedNetworkImage(
+                width: double.infinity,
+                fit: BoxFit.cover,
+                imageUrl: game.thumbnail,
+              ),
+            ),
+            bottom: const PreferredSize(
+              preferredSize: Size(double.infinity, 10.0),
+              child: TabBar(
+                tabs: [
+                  Tab(
+                    text: 'Description',
+                  ),
+                  Tab(
+                    text: 'Screenshots',
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Genre',
+                  style: TStyles.subheading1(),
                 ),
                 const SizedBox(height: 5.0),
                 MyChip(text: game.genre),
@@ -77,11 +104,12 @@ class BodyView extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(height: 20.0),
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -33,33 +33,31 @@ class _DetailPageState extends State<DetailPage> {
     return BlocProvider.value(
       value: detailBloc,
       child: Scaffold(
-        body: SafeArea(
-          child: BlocBuilder<DetailGameBloc, DetailGameState>(
-            bloc: detailBloc,
-            builder: (context, state) {
-              if (state is DetailGameLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
+        body: BlocBuilder<DetailGameBloc, DetailGameState>(
+          bloc: detailBloc,
+          builder: (context, state) {
+            if (state is DetailGameLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
 
-              if (state is DetailGameSuccess) {
-                return BodyView(
-                  game: state.game,
-                  isFavorite: state.isFavorite,
-                  onTapFavoriteCallback: () => detailBloc.add(
-                    OnLoadDetailGame(state.game.id),
-                  ),
-                );
-              }
+            if (state is DetailGameSuccess) {
+              return BodyView(
+                game: state.game,
+                isFavorite: state.isFavorite,
+                onTapFavoriteCallback: () => detailBloc.add(
+                  OnLoadDetailGame(state.game.id),
+                ),
+              );
+            }
 
-              if (state is DetailGameFailed) {
-                return Text(state.message ?? '');
-              }
+            if (state is DetailGameFailed) {
+              return Text(state.message ?? '');
+            }
 
-              return const SizedBox();
-            },
-          ),
+            return const SizedBox();
+          },
         ),
       ),
     );
