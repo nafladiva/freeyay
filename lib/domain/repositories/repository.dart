@@ -11,6 +11,6 @@ abstract class Repository {
   //Local
   Future<Either<Failure, List<Game>>> getFavoriteGames();
   Future<Either<Failure, String>> addFavorite(Game game);
-  Future<Either<Failure, void>> removeFavorite(Game game);
+  Future<Either<Failure, String>> removeFavorite(Game game);
   Future<bool> checkFavoriteStatus(Game game);
 }

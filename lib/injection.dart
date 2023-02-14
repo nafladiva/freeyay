@@ -12,7 +12,7 @@ void init() {
   //Bloc
   locator.registerFactory(() => GameBloc(locator(), locator()));
   locator.registerFactory(() => DetailGameBloc(locator(), locator()));
-  locator.registerFactory(() => FavoriteBloc(locator(), locator()));
+  locator.registerFactory(() => FavoriteBloc(locator(), locator(), locator()));
 
   //Use Cases
   locator.registerLazySingleton(() => GetLiveGames(locator()));
@@ -21,6 +21,7 @@ void init() {
   locator.registerLazySingleton(() => CheckFavoriteStatus(locator()));
   locator.registerLazySingleton(() => GetFavoriteGames(locator()));
   locator.registerLazySingleton(() => AddFavorite(locator()));
+  locator.registerLazySingleton(() => RemoveFavorite(locator()));
 
   //Repository
   locator.registerLazySingleton<Repository>(

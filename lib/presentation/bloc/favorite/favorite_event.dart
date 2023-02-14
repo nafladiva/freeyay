@@ -14,3 +14,9 @@ class OnAddFavorite extends FavoriteEvent {
 
   const OnAddFavorite(this.game);
 }
+
+class OnRemoveFavorite extends FavoriteEvent {
+  final Game game;
+
+  const OnRemoveFavorite(this.game);
+}

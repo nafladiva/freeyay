@@ -24,7 +24,7 @@ class FavoriteButton extends StatelessWidget {
       child: InkWell(
         onTap: () {
           if (isFavorite) {
-            print('Remove from favorites');
+            favoriteBloc.add(OnRemoveFavorite(game));
           } else {
             favoriteBloc.add(OnAddFavorite(game));
           }

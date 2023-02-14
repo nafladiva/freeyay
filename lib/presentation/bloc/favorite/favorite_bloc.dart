@@ -9,8 +9,9 @@ part 'favorite_state.dart';
 class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
   final GetFavoriteGames getFavoriteGames;
   final AddFavorite addFavorite;
+  final RemoveFavorite removeFavorite;
 
-  FavoriteBloc(this.getFavoriteGames, this.addFavorite)
+  FavoriteBloc(this.getFavoriteGames, this.addFavorite, this.removeFavorite)
       : super(FavoriteInitial()) {
     on<OnAddFavorite>((event, emit) async {
       final game = event.game;
@@ -24,6 +25,24 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
         },
         (data) {
           emit(const FavoriteSuccess(message: 'Success to add favorite game'));
+          add(OnLoadFavorite());
+        },
+      );
+    });
+
+    on<OnRemoveFavorite>((event, emit) async {
+      final game = event.game;
+
+      emit(FavoriteLoading());
+
+      final res = await removeFavorite.execute(game);
+      res.fold(
+        (failure) {
+          emit(const FavoriteFailed('Failed to remove favorite games'));
+        },
+        (data) {
+          emit(const FavoriteSuccess(
+              message: 'Success to remove favorite game'));
           add(OnLoadFavorite());
         },
       );

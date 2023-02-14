@@ -8,7 +8,7 @@ class RemoveFavorite {
 
   RemoveFavorite(this.repository);
 
-  Future<Either<Failure, void>> execute(Game game) {
+  Future<Either<Failure, String>> execute(Game game) {
     return repository.removeFavorite(game);
   }
 }

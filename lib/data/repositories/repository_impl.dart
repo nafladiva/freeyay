@@ -51,16 +51,6 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, String>> addFavorite(Game game) async {
-    try {
-      await localDataSource.addFavorite(game);
-      return const Right('Berhasil menambahkan favorite');
-    } on DataException {
-      return Left(DataFailure());
-    }
-  }
-
-  @override
   Future<Either<Failure, List<Game>>> getFavoriteGames() async {
     try {
       final result = await localDataSource.getAllFavoriteGames();
@@ -71,9 +61,23 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, void>> removeFavorite(Game game) {
-    // TODO: implement removeFavorite
-    throw UnimplementedError();
+  Future<Either<Failure, String>> addFavorite(Game game) async {
+    try {
+      await localDataSource.addFavorite(game);
+      return const Right('Berhasil menambahkan favorite');
+    } on DataException {
+      return Left(DataFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> removeFavorite(Game game) async {
+    try {
+      await localDataSource.removeFavorite(game);
+      return const Right('Berhasil menghapus favorite');
+    } on DataException {
+      return Left(DataFailure());
+    }
   }
 
   @override

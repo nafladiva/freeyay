@@ -34,9 +34,12 @@ class LocalDataSourceImpl implements LocalDataSource {
   }
 
   @override
-  Future<void> removeFavorite(Game game) {
-    // TODO: implement removeFavorite
-    throw UnimplementedError();
+  Future<void> removeFavorite(Game game) async {
+    try {
+      hiveDatabase.removeFavorite(game);
+    } catch (e) {
+      throw DatabaseException();
+    }
   }
 
   @override
