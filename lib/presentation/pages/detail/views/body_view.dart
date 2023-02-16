@@ -5,7 +5,7 @@ import 'package:freeyay/domain/entities/entities.dart';
 import 'package:freeyay/presentation/widgets/widgets.dart';
 
 class BodyView extends StatelessWidget {
-  const BodyView({
+  BodyView({
     required this.game,
     required this.isFavorite,
     required this.onTapFavoriteCallback,
@@ -15,6 +15,11 @@ class BodyView extends StatelessWidget {
   final Game game;
   final bool isFavorite;
   final VoidCallback onTapFavoriteCallback;
+
+  final descKey = GlobalKey();
+  final ssKey = GlobalKey();
+
+  final scrollCon = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,22 +52,35 @@ class BodyView extends StatelessWidget {
                 imageUrl: game.thumbnail,
               ),
             ),
-            bottom: const PreferredSize(
-              preferredSize: Size(double.infinity, 10.0),
+            bottom: PreferredSize(
+              preferredSize: const Size(double.infinity, 10.0),
               child: TabBar(
-                tabs: [
-                  Tab(
-                    text: 'Description',
-                  ),
-                  Tab(
-                    text: 'Screenshots',
-                  ),
+                indicatorColor: Themes.orangeColor,
+                tabs: const [
+                  Tab(text: 'Description'),
+                  Tab(text: 'Screenshots'),
                 ],
+                onTap: (value) {
+                  if (value == 0) {
+                    Scrollable.ensureVisible(
+                      descKey.currentContext ?? context,
+                      duration: const Duration(seconds: 1),
+                    );
+                  }
+                  if (value == 1) {
+                    Scrollable.ensureVisible(
+                      ssKey.currentContext ?? context,
+                      duration: const Duration(seconds: 1),
+                    );
+                    DefaultTabController.of(context)?.animateTo(1);
+                  }
+                },
               ),
             ),
           ),
         ),
         SliverToBoxAdapter(
+          key: descKey,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -85,24 +103,33 @@ class BodyView extends StatelessWidget {
                   textAlign: TextAlign.justify,
                   style: TStyles.paragraph1(),
                 ),
-                const SizedBox(height: 20.0),
+              ],
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          key: ssKey,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                 Text(
                   'Screenshots',
                   style: TStyles.subheading1(),
                 ),
-                const SizedBox(height: 5.0),
-                ScrollableHorizontalView(
-                  children: [
-                    ...(game.screenshots ?? []).map(
-                      (item) => Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
-                        child: CachedNetworkImage(
-                          width: 150,
-                          imageUrl: item,
-                        ),
+                const SizedBox(height: 10.0),
+                ...(game.screenshots ?? []).map(
+                  (item) => Padding(
+                    padding: const EdgeInsets.only(bottom: 12.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: CachedNetworkImage(
+                        width: double.infinity,
+                        imageUrl: item,
                       ),
                     ),
-                  ],
+                  ),
                 ),
                 const SizedBox(height: 20.0),
               ],
