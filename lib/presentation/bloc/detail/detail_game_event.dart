@@ -12,3 +12,9 @@ class OnLoadDetailGame extends DetailGameEvent {
 
   const OnLoadDetailGame(this.gameId);
 }
+
+class OnCheckFavoriteStatus extends DetailGameEvent {
+  final Game game;
+
+  const OnCheckFavoriteStatus(this.game);
+}

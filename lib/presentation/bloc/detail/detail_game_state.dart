@@ -19,6 +19,11 @@ class DetailGameSuccess extends DetailGameState {
       : super(isFavorite: isFavorite ?? false);
 }
 
+class FavoriteStatusSuccess extends DetailGameState {
+  const FavoriteStatusSuccess({bool? isFavorite})
+      : super(isFavorite: isFavorite ?? false);
+}
+
 class DetailGameFailed extends DetailGameState {
   const DetailGameFailed(String message) : super(message: message);
 }

@@ -19,8 +19,6 @@ class BodyView extends StatelessWidget {
   final descKey = GlobalKey();
   final ssKey = GlobalKey();
 
-  final scrollCon = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -38,11 +36,7 @@ class BodyView extends StatelessWidget {
                   game.title,
                   style: TStyles.heading1(color: Colors.white),
                 ),
-                FavoriteButton(
-                  game: game,
-                  isFavorite: isFavorite,
-                  callback: () {},
-                ),
+                FavoriteButton(game: game),
               ],
             ),
             flexibleSpace: FlexibleSpaceBar(
