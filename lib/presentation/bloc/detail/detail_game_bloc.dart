@@ -25,7 +25,7 @@ class DetailGameBloc extends Bloc<DetailGameEvent, DetailGameState> {
       final res = await getDetailGame.execute(gameId);
       await res.fold(
         (failure) {
-          emit(const DetailGameFailed('Gagal memuat detail game'));
+          emit(DetailGameFailed(failure.message));
         },
         (data) async {
           final isFavorite = await checkGameFavoriteStatus(data);

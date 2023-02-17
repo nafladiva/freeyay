@@ -1,7 +1,18 @@
-abstract class Failure {}
+abstract class Failure {
+  final String message;
 
-class ServerFailure extends Failure {}
+  const Failure({this.message = 'Something went wrong, try again later'});
+}
 
-class DataFailure extends Failure {}
+class ServerFailure extends Failure {
+  const ServerFailure({String? message}) : super(message: message ?? '');
+}
 
-class InternetConnectionFailure extends Failure {}
+class DataFailure extends Failure {
+  const DataFailure({String? message}) : super(message: message ?? '');
+}
+
+class InternetConnectionFailure extends Failure {
+  const InternetConnectionFailure({String? message})
+      : super(message: message ?? '');
+}

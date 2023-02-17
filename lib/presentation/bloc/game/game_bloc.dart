@@ -18,7 +18,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       final res = await getLiveGames.execute();
       res.fold(
         (failure) {
-          emit(const GameError('Failed to fetch data'));
+          emit(GameError(failure.message));
         },
         (data) {
           emit(GameSuccess(data));
@@ -34,7 +34,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       final res = await getGamesByPlatform.execute(platform);
       res.fold(
         (failure) {
-          emit(GameError('Failed to fetch data', platform: platform));
+          emit(GameError(failure.message, platform: platform));
         },
         (data) {
           emit(GameSuccess(data, platform: platform));

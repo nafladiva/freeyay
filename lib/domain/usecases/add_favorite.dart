@@ -8,7 +8,7 @@ class AddFavorite {
 
   AddFavorite(this.repository);
 
-  Future<Either<Failure, void>> execute(Game game) {
+  Future<Either<Failure, String>> execute(Game game) {
     return repository.addFavorite(game);
   }
 }

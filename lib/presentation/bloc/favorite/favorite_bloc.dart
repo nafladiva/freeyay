@@ -21,10 +21,10 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
       final res = await addFavorite.execute(game);
       res.fold(
         (failure) {
-          emit(const FavoriteFailed('Failed to add favorite games'));
+          emit(FavoriteFailed(failure.message));
         },
         (data) {
-          emit(const FavoriteSuccess(message: 'Success to add favorite game'));
+          emit(FavoriteSuccess(message: data));
           add(OnLoadFavorite());
         },
       );
@@ -38,11 +38,10 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
       final res = await removeFavorite.execute(game);
       res.fold(
         (failure) {
-          emit(const FavoriteFailed('Failed to remove favorite games'));
+          emit(FavoriteFailed(failure.message));
         },
         (data) {
-          emit(const FavoriteSuccess(
-              message: 'Success to remove favorite game'));
+          emit(FavoriteSuccess(message: data));
           add(OnLoadFavorite());
         },
       );
@@ -54,7 +53,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
       final res = await getFavoriteGames.execute();
       res.fold(
         (failure) {
-          emit(const FavoriteFailed('Failed to get favorite games'));
+          emit(FavoriteFailed(failure.message));
         },
         (data) {
           emit(FavoriteSuccess(favoriteGames: data));

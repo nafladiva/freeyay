@@ -19,9 +19,9 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSource.getLiveGames();
       return Right(result.map((e) => e.toEntity()).toList());
     } on ServerException {
-      return Left(ServerFailure());
+      return const Left(ServerFailure(message: Constant.serverErrorMessage));
     } on DataException {
-      return Left(DataFailure());
+      return const Left(DataFailure(message: Constant.dataErrorMessage));
     }
   }
 
@@ -32,9 +32,9 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSource.getGamesByPlatform(platform);
       return Right(result.map((e) => e.toEntity()).toList());
     } on ServerException {
-      return Left(ServerFailure());
+      return const Left(ServerFailure(message: Constant.serverErrorMessage));
     } on DataException {
-      return Left(DataFailure());
+      return const Left(DataFailure(message: Constant.dataErrorMessage));
     }
   }
 
@@ -44,9 +44,9 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSource.getDetailGame(gameId);
       return Right(result.toEntity());
     } on ServerException {
-      return Left(ServerFailure());
+      return const Left(ServerFailure(message: Constant.serverErrorMessage));
     } on DataException {
-      return Left(DataFailure());
+      return const Left(DataFailure(message: Constant.dataErrorMessage));
     }
   }
 
@@ -56,7 +56,7 @@ class RepositoryImpl implements Repository {
       final result = await localDataSource.getAllFavoriteGames();
       return Right(result);
     } on DataException {
-      return Left(DataFailure());
+      return const Left(DataFailure(message: Constant.dataErrorMessage));
     }
   }
 
@@ -64,9 +64,9 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, String>> addFavorite(Game game) async {
     try {
       await localDataSource.addFavorite(game);
-      return const Right('Berhasil menambahkan favorite');
+      return const Right('Success added game to favorites');
     } on DataException {
-      return Left(DataFailure());
+      return const Left(DataFailure(message: Constant.dataErrorMessage));
     }
   }
 
@@ -74,9 +74,9 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, String>> removeFavorite(Game game) async {
     try {
       await localDataSource.removeFavorite(game);
-      return const Right('Berhasil menghapus favorite');
+      return const Right('Game has been removed from favorites');
     } on DataException {
-      return Left(DataFailure());
+      return const Left(DataFailure(message: Constant.dataErrorMessage));
     }
   }
 
