@@ -35,11 +35,10 @@ class _YourFavoriteViewState extends State<YourFavoriteView> {
             final favoriteGames = state.favoriteGames ?? [];
 
             return ScrollableHorizontalView(
-              children: [
-                ...favoriteGames.map(
-                  (game) => GameCard(game: game),
-                ),
-              ],
+              children: List.generate(
+                favoriteGames.length,
+                (index) => GameCard(game: favoriteGames[index]),
+              ),
             );
           },
         ),

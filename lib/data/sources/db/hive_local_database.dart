@@ -29,6 +29,7 @@ class HiveLocalDatabase {
       thumbnail: game.thumbnail,
       description: game.description,
       genre: game.genre,
+      addedToFavoriteTimeStamp: DateTime.now(),
     );
   }
 }

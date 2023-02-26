@@ -18,8 +18,15 @@ class LocalDataSourceImpl implements LocalDataSource {
   Future<List<Game>> getAllFavoriteGames() async {
     try {
       final box = hiveDatabase.getFavorites();
-      return box.values.map((game) => game.toEntity()).toList();
+
+      //Sort by added timestamp
+      final sorted = box.values.toList()
+        ..sort(((a, b) => b.addedToFavoriteTimeStamp!
+            .compareTo(a.addedToFavoriteTimeStamp!)));
+
+      return sorted.map((game) => game.toEntity()).toList();
     } catch (e) {
+      print(e);
       throw DatabaseException();
     }
   }

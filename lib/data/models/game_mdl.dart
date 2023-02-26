@@ -21,6 +21,8 @@ class GameMdl extends HiveObject {
   final String? developer;
   final DateTime? releaseDate;
   final List<String>? screenshots;
+  @HiveField(5)
+  final DateTime? addedToFavoriteTimeStamp;
 
   GameMdl({
     required this.id,
@@ -34,6 +36,7 @@ class GameMdl extends HiveObject {
     this.developer,
     this.releaseDate,
     this.screenshots,
+    this.addedToFavoriteTimeStamp,
   });
 
   factory GameMdl.fromMap(Map<String, dynamic> json) => GameMdl(
