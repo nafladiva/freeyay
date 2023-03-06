@@ -75,7 +75,7 @@ class _GamesByPlatformViewState extends State<GamesByPlatformView> {
             }
 
             if (state is GameLoading) return const GameListLoader();
-            if (state is GameError) return Text(state.errorMessage ?? '');
+            if (state is GameError) return Text(state.message);
 
             return const SizedBox();
           },

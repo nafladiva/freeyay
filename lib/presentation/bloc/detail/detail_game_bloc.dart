@@ -39,7 +39,7 @@ class DetailGameBloc extends Bloc<DetailGameEvent, DetailGameState> {
       emit(DetailGameLoading());
 
       final isFavorite = await checkGameFavoriteStatus(game);
-      emit(FavoriteStatusSuccess(isFavorite: isFavorite));
+      emit(FavoriteStatusSuccess(isFavorite));
     });
   }
 }

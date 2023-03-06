@@ -17,7 +17,7 @@ class _YourFavoriteViewState extends State<YourFavoriteView> {
   @override
   void initState() {
     super.initState();
-    widget.bloc.add(OnLoadFavorite());
+    widget.bloc.add(const OnLoadFavorite());
   }
 
   @override
@@ -32,14 +32,22 @@ class _YourFavoriteViewState extends State<YourFavoriteView> {
         const SizedBox(height: 15.0),
         BlocBuilder<FavoriteBloc, FavoriteState>(
           builder: (context, state) {
-            final favoriteGames = state.favoriteGames ?? [];
+            if (state is FavoriteSuccess) {
+              final favoriteGames = state.favoriteGames;
 
-            return ScrollableHorizontalView(
-              children: List.generate(
-                favoriteGames.length,
-                (index) => GameCard(game: favoriteGames[index]),
-              ),
-            );
+              return ScrollableHorizontalView(
+                children: List.generate(
+                  favoriteGames.length,
+                  (index) => GameCard(game: favoriteGames[index]),
+                ),
+              );
+            }
+
+            if (state is FavoriteFailed) {
+              return Text(state.message);
+            }
+
+            return const SizedBox();
           },
         ),
       ],

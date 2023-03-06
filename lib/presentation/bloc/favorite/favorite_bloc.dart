@@ -24,8 +24,8 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
           emit(FavoriteFailed(failure.message));
         },
         (data) {
-          emit(FavoriteSuccess(message: data));
-          add(OnLoadFavorite());
+          // emit(FavoriteSuccess(message: data));
+          add(OnLoadFavorite(message: data));
         },
       );
     });
@@ -41,13 +41,15 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
           emit(FavoriteFailed(failure.message));
         },
         (data) {
-          emit(FavoriteSuccess(message: data));
-          add(OnLoadFavorite());
+          // emit(FavoriteSuccess(message: data));
+          add(OnLoadFavorite(message: data));
         },
       );
     });
 
     on<OnLoadFavorite>((event, emit) async {
+      final message = event.message;
+
       emit(FavoriteLoading());
 
       final res = await getFavoriteGames.execute();
@@ -56,7 +58,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
           emit(FavoriteFailed(failure.message));
         },
         (data) {
-          emit(FavoriteSuccess(favoriteGames: data));
+          emit(FavoriteSuccess(favoriteGames: data, message: message));
         },
       );
     });

@@ -43,35 +43,39 @@ class _FavoriteButtonState extends State<FavoriteButton> {
         child: BlocBuilder<DetailGameBloc, DetailGameState>(
           bloc: detailGameBloc,
           builder: (context, state) {
-            final isFavorite = state.isFavorite;
+            if (state is FavoriteStatusSuccess) {
+              final isFavorite = state.isFavorite;
 
-            return Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: InkWell(
-                onTap: () {
-                  if (isFavorite) {
-                    favoriteBloc.add(OnRemoveFavorite(widget.game));
-                  } else {
-                    favoriteBloc.add(OnAddFavorite(widget.game));
-                  }
+              return Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: InkWell(
+                  onTap: () {
+                    if (isFavorite) {
+                      favoriteBloc.add(OnRemoveFavorite(widget.game));
+                    } else {
+                      favoriteBloc.add(OnAddFavorite(widget.game));
+                    }
 
-                  detailGameBloc.add(OnCheckFavoriteStatus(widget.game));
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(4.0),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    isFavorite
-                        ? Icons.favorite
-                        : Icons.favorite_border_outlined,
-                    color: Colors.red,
+                    detailGameBloc.add(OnCheckFavoriteStatus(widget.game));
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(4.0),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_border_outlined,
+                      color: Colors.red,
+                    ),
                   ),
                 ),
-              ),
-            );
+              );
+            }
+
+            return const SizedBox();
           },
         ),
       ),

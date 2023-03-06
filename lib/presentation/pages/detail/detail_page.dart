@@ -53,7 +53,7 @@ class _DetailPageState extends State<DetailPage> {
             }
 
             if (state is DetailGameFailed) {
-              return Text(state.message ?? '');
+              return Text(state.message);
             }
 
             return const SizedBox();
