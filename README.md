@@ -10,4 +10,5 @@ https://www.freetogame.com/api-doc
 ---
 
 TODO:
-- [ ] Implement repository, execute data from API
+- [ ] add navbar (Home, favorites, settings)
+- [ ] add toggle for dark theme
