@@ -85,6 +85,6 @@ class _HomePageState extends State<HomePage> {
   Future<void> _refreshPage() async {
     liveGameBloc.add(OnFetchLiveGames());
     platformGameBloc.add(const OnFetchGamesByPlatform(Platform.all));
-    favoriteBloc.add(OnLoadFavorite());
+    favoriteBloc.add(const OnLoadFavorite());
   }
 }

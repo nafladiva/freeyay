@@ -8,13 +8,11 @@ class BodyView extends StatelessWidget {
   BodyView({
     required this.game,
     required this.isFavorite,
-    required this.onTapFavoriteCallback,
     super.key,
   });
 
   final Game game;
   final bool isFavorite;
-  final VoidCallback onTapFavoriteCallback;
 
   final descKey = GlobalKey();
   final ssKey = GlobalKey();

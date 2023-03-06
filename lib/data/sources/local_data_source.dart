@@ -26,7 +26,6 @@ class LocalDataSourceImpl implements LocalDataSource {
 
       return sorted.map((game) => game.toEntity()).toList();
     } catch (e) {
-      print(e);
       throw DatabaseException();
     }
   }
