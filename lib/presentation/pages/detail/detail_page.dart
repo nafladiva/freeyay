@@ -39,9 +39,7 @@ class _DetailPageState extends State<DetailPage> {
             bloc: detailBloc,
             builder: (context, state) {
               if (state is DetailGameLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
+                return const LoaderView();
               }
 
               if (state is DetailGameSuccess) {
