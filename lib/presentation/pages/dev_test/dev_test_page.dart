@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freeyay/common/text_styles.dart';
 
 import 'all_pages/animation_page.dart';
+import 'all_pages/blur_background_page.dart';
 import 'widgets/widgets.dart';
 
 class DevTestPage extends StatelessWidget {
@@ -23,6 +24,10 @@ class DevTestPage extends StatelessWidget {
               MenuButton(
                 text: 'Flutter animate',
                 routeTo: AnimationPage(),
+              ),
+              MenuButton(
+                text: 'Background blur (bottom sheet)',
+                routeTo: BlurBackgroundPage(),
               ),
             ],
           ),

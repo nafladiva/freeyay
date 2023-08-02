@@ -17,7 +17,7 @@ class AnimationPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Animation',
-          style: TStyles.heading1(color: Colors.white),
+          style: TStyles.subheading1(color: Colors.white),
         ),
       ),
       body: SafeArea(
