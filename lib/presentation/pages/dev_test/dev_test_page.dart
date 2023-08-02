@@ -3,6 +3,7 @@ import 'package:freeyay/common/text_styles.dart';
 
 import 'all_pages/animation_page.dart';
 import 'all_pages/blur_background_page.dart';
+import 'all_pages/custom_toast_page.dart';
 import 'widgets/widgets.dart';
 
 class DevTestPage extends StatelessWidget {
@@ -28,6 +29,10 @@ class DevTestPage extends StatelessWidget {
               MenuButton(
                 text: 'Background blur (bottom sheet)',
                 routeTo: BlurBackgroundPage(),
+              ),
+              MenuButton(
+                text: 'Custom toast',
+                routeTo: CustomToastPage(),
               ),
             ],
           ),
