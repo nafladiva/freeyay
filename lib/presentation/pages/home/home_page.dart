@@ -5,7 +5,6 @@ import 'package:freeyay/injection.dart';
 import 'package:freeyay/presentation/bloc/bloc.dart';
 import 'package:hive/hive.dart';
 
-import '../dev_test/dev_test_page.dart';
 import 'views/views.dart';
 
 class HomePage extends StatefulWidget {
@@ -57,32 +56,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          actions: [
-            PopupMenuButton(
-              color: Themes.primaryColor,
-              onSelected: (value) {
-                if (value == '/test') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DevTestPage(),
-                    ),
-                  );
-                }
-              },
-              itemBuilder: (context) {
-                return [
-                  PopupMenuItem(
-                    value: '/test',
-                    child: Text(
-                      'Test Page',
-                      style: TStyles.subheading1(color: Colors.white),
-                    ),
-                  ),
-                ];
-              },
-            ),
-          ],
         ),
         body: SafeArea(
           child: RefreshIndicator(
